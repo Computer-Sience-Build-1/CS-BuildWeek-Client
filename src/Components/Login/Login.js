@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import config from "../../Config/index.js";
+import { Input, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 /**
  * Login Component allows user to login to their existing account
  * Sends credentials object to the API with a username and password
- * Expects from the API a response with a key, validating they are a registered user
  */
 
 class Login extends Component {
@@ -17,11 +18,8 @@ class Login extends Component {
     };
   }
 
-  /**
-   * handleInput sets user input to state, to accurately reflect their input and save for form submission
-   * @param: Event, that triggers the function from user action.
-   */
-  handleInput = e => {
+  //  * handleInput sets user input to state, to accurately reflect their input and save for form submission   
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -40,15 +38,16 @@ class Login extends Component {
     };
 
     this.setState({
-      // TODO: Can add a loading spinner for improved UI
+      // Can add a loading spinner for improved UI?
       loading: true
     });
 
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/login", credentials)
+      .post(`${config.apiUrl}/api/login/`, credentials)
       .then(res => {
         // SET KEY TO localStorage?
         // Verify return format of res {key: 12345}
+        console.log("AUTH KEY", res.data.key);
         localStorage.setItem("authToken", res.data.key);
         this.setState({
           username: "",
@@ -66,39 +65,26 @@ class Login extends Component {
 
   render() {
     return (
-      <Body>
-        <Background>
-          <Form onSubmit={this.handleSubmit}>
-            <FormHeader>Lambda MUD</FormHeader>
-            <FormLabel name="username">
-              <FormInput
-                onChange={this.handleInput}
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={this.state.username}
-              />
-            </FormLabel>
-
-            <FormLabel name="password">
-              <FormInput
-                onChange={this.handleInput}
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={this.state.password}
-              />
-            </FormLabel>
-
-            <FormSubmit type="submit" disabled={!this.state.password}>
-              Login
-            </FormSubmit>
-            <Link to="/register">
-              <FormText>Not yet registered?</FormText>
-            </Link>
-          </Form>
-        </Background>
-      </Body>
+      <div class="login-container">
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            onChange={this.handleChange}
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={this.state.username}
+          />
+          <Input
+            onChange={this.handleChange}
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+          />
+          <Button text="submit" disabled={!this.state.password} onClick={this.handleSubmit} >Submit</Button>
+          <Link to="/register"></Link>
+        </form>
+      </div>
     );
   }
 }

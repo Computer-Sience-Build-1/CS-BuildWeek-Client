@@ -1,0 +1,9 @@
+.register-container {
+    display: flex;
+    width: 500px;
+    height: 500px;
+}
+
+.register-form {
+    display: flex;
+}
