@@ -10,7 +10,7 @@ class Register extends Component {
     super();
     this.state = {
       username: "",
-      password: "",
+      password1: "",
       password2: "",
       loading: false
     };
@@ -21,21 +21,21 @@ class Register extends Component {
     // TODO: Verify passwords match and add type checking for password security
 
     const credentials = {
-      username: this.state.username,
-      password: this.state.password,
+      username: this.state.username,      
+      password1: this.state.password1,
       password2: this.state.password2
     };
+    
 
     this.setState({
       loading: true
-    });
-    console.log("CREDS", credentials)
+    });    
     axios
       .post(`${config.apiUrl}/api/registration/`, credentials)
       // URL will need updating when Django is complete
       .then(res => {
+        console.log("RESPONSE", res);
         // SET KEY TO localStorage
-        console.log("TOKEN", res.data.key);
         localStorage.setItem("authToken", res.data.key);
         this.setState({
           username: "",
@@ -47,7 +47,7 @@ class Register extends Component {
         this.props.history.push(`/`);
       })
       .catch(err => {
-        console.log(err.response.data);
+        console.log(err.response);
       });
   };
   handleChange = e => {
@@ -61,24 +61,31 @@ class Register extends Component {
       <div className="register-container">
         <form className="register-form">
           <Input
+            className="game-input"
             onChange={this.handleChange}
             name="username"
             placeholder="username..."
             value={this.state.username}
           />
           <Input
+            className="game-input"
             onChange={this.handleChange}
-            name="password"
+            name="password1"
             placeholder="password..."
-            value={this.state.password}
+            value={this.state.password1}
           />
           <Input
+            className="game-input"
             onChange={this.handleChange}
             name="password2"
             placeholder="confirm password..."
             value={this.state.password2}
           />
-          <Button disabled={!this.state.password} onSubmit={this.handleSubmit} onClick={this.handleSubmit}>
+          <Button
+            disabled={!this.state.password1}
+            onSubmit={this.handleSubmit}
+            onClick={this.handleSubmit}
+          >
             Submit
           </Button>
         </form>

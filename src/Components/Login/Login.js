@@ -27,8 +27,7 @@ class Login extends Component {
 
   /**
    * Submits user inputs to the API endpoint to login
-   * If successful, sets the user's key to localStorage. If unsuccessful, logs error.
-   * @param {*} Event that triggers the function from user submitting form
+   * If successful, sets the user's key to localStorage. If unsuccessful, logs error.   
    */
   handleSubmit = e => {
     e.preventDefault();
@@ -58,16 +57,16 @@ class Login extends Component {
         this.props.history.push(`/`);
       })
       .catch(err => {
-        console.error(err.response);
-        // TODO: Find out expected errors and format
+        console.error(err.response);        
       });
   };
 
   render() {
     return (
-      <div class="login-container">
-        <form onSubmit={this.handleSubmit}>
+      <div class="register-container">
+        <form className="register-form" onSubmit={this.handleSubmit}>
           <Input
+            className="game-input"
             onChange={this.handleChange}
             type="text"
             name="username"
@@ -75,13 +74,20 @@ class Login extends Component {
             value={this.state.username}
           />
           <Input
+            className="game-input"
             onChange={this.handleChange}
             type="password"
             name="password"
             placeholder="Password"
             value={this.state.password}
           />
-          <Button text="submit" disabled={!this.state.password} onClick={this.handleSubmit} >Submit</Button>
+          <Button
+            text="submit"
+            disabled={!this.state.password}
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </Button>
           <Link to="/register"></Link>
         </form>
       </div>
