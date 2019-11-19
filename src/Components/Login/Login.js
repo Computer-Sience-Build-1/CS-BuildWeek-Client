@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import config from "../../config/index.js";
+import config from "../../Config/index.js";
 import { Input, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 /**
@@ -47,6 +47,7 @@ class Login extends Component {
       .then(res => {
         // SET KEY TO localStorage?
         // Verify return format of res {key: 12345}
+        console.log("AUTH KEY", res.data.key);
         localStorage.setItem("authToken", res.data.key);
         this.setState({
           username: "",
@@ -80,7 +81,7 @@ class Login extends Component {
             placeholder="Password"
             value={this.state.password}
           />
-          <Button text="submit" disabled={!this.state.password}>Submit</Button>
+          <Button text="submit" disabled={!this.state.password} onClick={this.handleSubmit} >Submit</Button>
           <Link to="/register"></Link>
         </form>
       </div>

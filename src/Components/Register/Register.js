@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import config from "../../config/index.js";
+import config from "../../Config/index.js";
 import {Input, Button} from '@material-ui/core';
 
-import '/Register.css';
+import './Register.css';
 
 class Register extends Component {
   constructor() {
@@ -17,8 +17,7 @@ class Register extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault();
-
+    e.preventDefault();    
     // TODO: Verify passwords match and add type checking for password security
 
     const credentials = {
@@ -30,11 +29,13 @@ class Register extends Component {
     this.setState({
       loading: true
     });
-
+    console.log("CREDS", credentials)
     axios
-      .post(`${config.apiUrl}/api/registration/`, credentials)  // URL will need updating when Django is complete
+      .post(`${config.apiUrl}/api/registration/`, credentials)
+      // URL will need updating when Django is complete
       .then(res => {
-        // SET KEY TO localStorage?        
+        // SET KEY TO localStorage
+        console.log("TOKEN", res.data.key);
         localStorage.setItem("authToken", res.data.key);
         this.setState({
           username: "",
@@ -50,34 +51,36 @@ class Register extends Component {
       });
   };
   handleChange = e => {
-    this.setState({
+    this.setState({      
       [e.target.name]: e.target.value
     });
   };
 
   render() {
     return (
-      <div class="register-container">
-        <form class="register-form">
+      <div className="register-container">
+        <form className="register-form">
           <Input
-            onChange={this.onChange}
+            onChange={this.handleChange}
             name="username"
             placeholder="username..."
             value={this.state.username}
           />
           <Input
-            onChange={this.onChange}
+            onChange={this.handleChange}
             name="password"
             placeholder="password..."
             value={this.state.password}
           />
           <Input
-            onChange={this.onChange}
+            onChange={this.handleChange}
             name="password2"
             placeholder="confirm password..."
             value={this.state.password2}
           />
-          <Button disabled={!this.state.password}  onSubmit={this.onSubmit}>Submit</Button>
+          <Button disabled={!this.state.password} onSubmit={this.handleSubmit} onClick={this.handleSubmit}>
+            Submit
+          </Button>
         </form>
       </div>
     );

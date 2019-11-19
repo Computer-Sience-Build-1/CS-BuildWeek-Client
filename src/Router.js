@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import {BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
 
@@ -34,11 +34,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
  */
 const Router = () => {
   return (
-    <Switch>
-      <Route path="/register" component={Register} />
-      <Route path="/login" component={Login} />      
-      {/* <ProtectedRoute path="/" component={} />  render the game in a protected route*/}
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        {/* <ProtectedRoute path="/" component={} />  render the game in a protected route*/}
+      </Switch>
+    </BrowserRouter>
   );
 };
 
