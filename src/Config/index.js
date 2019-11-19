@@ -1,9 +1,10 @@
 import axios from "axios";
 
-//  * Creates a config object with commonly used URLs or keys throughout the application
+//  * Creates a config object with commonly used URLs || keys throughout the application
 //  * axiosWithAuth returns an axios instance with the authorization headers and baseURL
  
 export const config = {
+
          // apiUrl: "http://127.0.0.1:8000",
          // apiUrl: "https://lambda-mud-test.herokuapp.com",
          apiUrl: "https://lambda-mud-test.herokuapp.com",

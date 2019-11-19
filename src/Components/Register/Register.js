@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import config from "../../config/index";
+import config from "../../config/index.js";
 import {Input, Button} from '@material-ui/core';
 
-import 'Register.css';
+import '/Register.css';
 
 class Register extends Component {
   constructor() {
@@ -77,7 +77,7 @@ class Register extends Component {
             placeholder="confirm password..."
             value={this.state.password2}
           />
-          <Button onSubmit={this.onSubmit} />
+          <Button disabled={!this.state.password}  onSubmit={this.onSubmit}>Submit</Button>
         </form>
       </div>
     );
