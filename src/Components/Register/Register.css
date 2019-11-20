@@ -1,9 +1,47 @@
 .register-container {
-    display: flex;
-    width: 500px;
-    height: 500px;
+    height: 980px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../../Assets/ATBEYLRXPU.jpg)
+    
+
 }
 
-.register-form {
-    display: flex;
+.game-input {
+  border: none;
+  padding-left: 2em;
+  height: 1.5em;
+  font-size: 1em;
+  width: 70%;
+  font-family: "Press Start 2P", cursive;
+  background-color: #c5cec7;
+  padding-top: 0.3em;
 }
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  align-self: center;
+  margin: 0 auto;
+
+}
+Button {
+  cursor: pointer;
+  width: 25%;
+  height: 2.5em;
+  border-radius: 50px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #094512;
+  border: 1px solid #747574;
+  color: #e4ebe5;
+  font-family: "Press Start 2P", cursive;
+
+}
+
+Button:hover {
+    box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.35);
+    transition: box-shadow 0.1s ease-in-out;  
+  }  
+

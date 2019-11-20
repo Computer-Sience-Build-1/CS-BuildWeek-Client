@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
+import Game from "./Components/Game/Game";
 
 // * Checks if a user is authorized to access the game.
 const isAuthorized = () => {
@@ -38,7 +39,7 @@ const Router = () => {
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        {/* <ProtectedRoute path="/" component={} />  render the game in a protected route*/}
+        <ProtectedRoute path="/" component={Game} />  render the game in a protected route
       </Switch>
     </BrowserRouter>
   );
