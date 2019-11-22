@@ -17,39 +17,37 @@ class Register extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault();    
-    // TODO: Verify passwords match and add type checking for password security
+      e.preventDefault();
+      // TODO: Verify passwords match and add type checking for password security
 
-    const credentials = {
-      username: this.state.username,      
-      password1: this.state.password1,
-      password2: this.state.password2
-    };
-    
+      const credentials = {
+        username: this.state.username,
+        password1: this.state.password1,
+        password2: this.state.password2
+      };
 
-    this.setState({
-      loading: true
-    });    
-    axios
-      .post(`${config.apiUrl}/api/registration/`, credentials)
-      // URL will need updating when Django is complete
-      .then(res => {
-        console.log("RESPONSE", res);
-        // SET KEY TO localStorage
-        localStorage.setItem("authToken", res.data.key);
-        this.setState({
-          username: "",
-          password: "",
-          password2: "",
-          loading: false
-        });
-        // Route to game when component is complete and router is setup
-        this.props.history.push(`/`);
-      })
-      .catch(err => {
-        console.log(err.response);
+      //https://csbuildonemud.herokuapp.com/api/registration/
+      this.setState({
+        loading: true
       });
-  };
+      axios
+        .post(`${config.apiUrl}/api/registration/`, credentials)        
+        // URL will need updating when Django is complete
+        .then(res => {                    
+          localStorage.setItem("authToken", res.data.key);
+          this.setState({
+            username: "",
+            password: "",
+            password2: "",
+            loading: false
+          });
+          // Route to game when component is complete and router is setup
+          this.props.history.push(`/`);
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+    };
   handleChange = e => {
     this.setState({      
       [e.target.name]: e.target.value

@@ -36,17 +36,13 @@ class Login extends Component {
       password: this.state.password
     };
 
-    this.setState({
-      // Can add a loading spinner for improved UI?
+    this.setState({      
       loading: true
     });
 
     axios
       .post(`${config.apiUrl}/api/login/`, credentials)
       .then(res => {
-        // SET KEY TO localStorage?
-        // Verify return format of res {key: 12345}
-        console.log("AUTH KEY", res.data.key);
         localStorage.setItem("authToken", res.data.key);
         this.setState({
           username: "",

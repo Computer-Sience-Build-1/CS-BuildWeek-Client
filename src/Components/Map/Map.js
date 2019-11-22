@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class MapComponent extends Component {
     constructor(props) {
     super(props);
-    this.state = {
+    this.state = {  // width, height of the map
       width: 600,
       height: 300,
       userX: props.userX,  // We'll need the x and y of the user to put the map
