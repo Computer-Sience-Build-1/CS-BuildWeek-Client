@@ -39,7 +39,7 @@ const Router = () => {
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <ProtectedRoute path="/" component={Game} />  render the game in a protected route
+        <ProtectedRoute path="/" component={Game} />
       </Switch>
     </BrowserRouter>
   );
